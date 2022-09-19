@@ -1,2 +1,35 @@
 ---
 # defaults file for plausible
+
+# Docker user
+plausible_uid: docker
+plausible_gid: docker
+
+# Email
+plausible_smtp_host:
+plausible_smtp_port: 587
+plausible_smtp_username:
+plausible_smtp_password:
+
+# Plausible parameters
+plausible_port: 8000
+plausible_admin_user_email: change-me
+plausible_admin_user_name: change-me
+plausible_admin_user_pwd: change-me
+plausible_base_url: change-me
+plausible_secret_key_base: change-me
+
+# SMTP
+plausible_smtp_email: "changeme@example.com"
+
+# Database
+plausible_clickhouse_version: "21.3.2.5"
+plausible_version: "latest"
+plausible_pg_password: "change_me"
+
+# Volumes
+plausible_base: "/mnt/plausible"
+plausible_config: "{{ plausible_base }}/config"
+plausible_db_data: "{{ plausible_base }}/db_data"
+plausible_event_data: "{{ plausible_base }}/event_data"
+plausible_geoip_database: "{{ plausible_base }}/geoip_data"

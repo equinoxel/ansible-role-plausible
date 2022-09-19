@@ -1,8 +1,23 @@
 ---
 - name: Converge
   hosts: all
-  gather_facts: false
-  tasks:
-    - name: "Include laurivan.plausible"
-      ansible.builtin.include_role:
-        name: "laurivan.plausible"
+  # gather_facts: false
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+    - name: Install python requests
+      pip:
+        name: 
+          - requests
+          - docker
+          - docker-compose
+    - name: Install docker
+      vars:
+        docker_service_manage: false
+      include_role:
+        name: geerlingguy.docker
+      
+  roles:
+    - role: laurivan.plausible
+
