@@ -4,7 +4,7 @@
 # Check if geoip volume exists
 - name: Check if geoip volume exists
   ansible.builtin.stat:
-    path: "{{ plausible_volume_geoip }}/GeoLite2-Country.mmdb"
+    path: "{{ plausible_volume_geoip }}/{{ plausible_geoip_db }}"
   register: plausible_geoip_stat
 
 - name: Set up directories

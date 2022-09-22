@@ -29,3 +29,6 @@ plausible_volume_config: "{{ plausible_volume_base }}/config"
 plausible_volume_db: "{{ plausible_volume_base }}/db_data"
 plausible_volume_events: "{{ plausible_volume_base }}/event_data"
 plausible_volume_geoip: "{{ plausible_volume_base }}/geoip_data"
+
+# GeoIP
+plausible_geoip_db: "GeoLite2-Country.mmdb"

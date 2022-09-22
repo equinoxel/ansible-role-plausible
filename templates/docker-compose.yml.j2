@@ -46,7 +46,7 @@ services:
       - {{ plausible_volume_config }}/env.plausible.conf
 {% if plausible_geoip_stat.stat.exists %}
     volumes:
-      - {{ plausible_volume_geoip }}/GeoLite2-Country.mmdb:/geoip:ro
+      - {{ plausible_volume_geoip }}/{{ plausible_geoip_db }}:/geoip:ro
 {% else %}
     # No GeoIP data volume
 {% endif%}
