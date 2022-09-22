@@ -13,7 +13,7 @@
     path: "{{ item }}"
     owner: "{{ ansible_effective_user_id }}"
     group: "{{ ansible_effective_group_id }}"
-   mode: 0750
+    mode: "0750"
   with_items:
     - "{{ plausible_volume_config }}"
     - "{{ plausible_volume_events }}"
@@ -26,7 +26,7 @@
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
-    mode: 0755
+    mode: "0755"
     owner: 70
   with_items:
     - "{{ plausible_volume_db }}"
