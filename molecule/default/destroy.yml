@@ -8,7 +8,7 @@
     # Developer must implement.
     - name: Remove the docker image
       community.docker.docker_container:
-        name: instance
+        name: instance-plausible
         state: absent
 
     # Mandatory configuration for Molecule to function.
