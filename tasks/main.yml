@@ -1,2 +1,54 @@
 ---
 # tasks file for plausible
+
+- name: Set up directories
+  ansible.builtin.file:
+    state: directory
+    path: "{{ item }}"
+    mode: 0755
+  with_items:
+    - "{{ plausible_volume_media }}"
+    - "{{ plausible_volume_certs }}"
+    - "{{ plausible_volume_geoip }}"
+    - "{{ plausible_volume_templates }}"
+    - "{{ plausible_volume_config }}"
+    - "{{ plausible_volume_redis }}"
+    - "~/plausible"
+  tags:
+    - configuration
+  become: false
+
+- name: Set up the database directory.
+  ansible.builtin.file:
+    state: directory
+    path: "{{ item }}"
+    mode: 0755
+    owner: 70
+  with_items:
+    - "{{ plausible_volume_db }}"
+  tags:
+    - configuration
+  become: false
+
+- name: Copy plausible docker-compose template.
+  ansible.builtin.template:
+    src: templates/docker-compose.yml.j2
+    dest: ~/plausible/docker-compose.yml
+    mode: '0640'
+  become: false
+  notify: Restart plausible
+
+- name: Copy plausible configuration.
+  ansible.builtin.template:
+    src: templates/env.plausible.conf.j2
+    dest: "{{ plausible_volume_config }}/env.plausible.conf"
+    mode: '0640'
+  become: false
+  notify: Restart plausible
+
+- name: Ensure plausible is running.
+  community.docker.docker_compose:
+    project_src: ~/plausible/
+    build: false
+  become: false
+

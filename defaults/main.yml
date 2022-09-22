@@ -1,10 +1,6 @@
 ---
 # defaults file for plausible
 
-# Docker user
-plausible_uid: docker
-plausible_gid: docker
-
 # Email
 plausible_smtp_host:
 plausible_smtp_port: 587
