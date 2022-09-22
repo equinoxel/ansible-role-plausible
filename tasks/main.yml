@@ -11,8 +11,9 @@
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
-    owner: "{{ ansible_user_id }}"
-    mode: 0750
+    owner: "{{ ansible_effective_user_id }}"
+    group: "{{ ansible_effective_group_id }}"
+   mode: 0750
   with_items:
     - "{{ plausible_volume_config }}"
     - "{{ plausible_volume_events }}"
@@ -48,7 +49,7 @@
   ansible.builtin.copy:
     src: "{{ item }}"
     dest: "{{ plausible_volume_config }}/{{ item }}"
-    mode: '0640'
+    mode: '0644'
   loop:
     - "clickhouse-config.xml"
     - "clickhouse-user-config.xml"

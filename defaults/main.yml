@@ -9,7 +9,7 @@ plausible_smtp_password:
 
 # Plausible parameters
 plausible_port: 8000
-plausible_admin_user_email: change-me
+plausible_admin_user_email: changeme@example.com
 plausible_admin_user_name: change-me
 plausible_admin_user_pwd: change-me
 plausible_base_url: change-me
