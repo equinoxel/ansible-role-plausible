@@ -11,14 +11,15 @@
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
-    mode: 0755
+    owner: "{{ ansible_user_id }}"
+    mode: 0750
   with_items:
     - "{{ plausible_volume_config }}"
     - "{{ plausible_volume_events }}"
     - "~/plausible"
   tags:
     - configuration
-  become: false
+  become: true
 
 - name: Set up the database directory.
   ansible.builtin.file:
