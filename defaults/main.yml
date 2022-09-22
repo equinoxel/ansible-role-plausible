@@ -24,8 +24,8 @@ plausible_version: "latest"
 plausible_pg_password: "change_me"
 
 # Volumes
-plausible_base: "/mnt/plausible"
-plausible_config: "{{ plausible_base }}/config"
-plausible_db_data: "{{ plausible_base }}/db_data"
-plausible_event_data: "{{ plausible_base }}/event_data"
-plausible_geoip_database: "{{ plausible_base }}/geoip_data"
+plausible_volume_base: "/mnt/plausible"
+plausible_volume_config: "{{ plausible_volume_base }}/config"
+plausible_volume_db: "{{ plausible_volume_base }}/db_data"
+plausible_volume_events: "{{ plausible_volume_base }}/event_data"
+plausible_volume_geoip: "{{ plausible_volume_base }}/geoip_data"

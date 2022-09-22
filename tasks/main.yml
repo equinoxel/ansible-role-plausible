@@ -1,18 +1,20 @@
 ---
 # tasks file for plausible
 
+# Check if geoip volume exists
+- name: Check if geoip volume exists
+  ansible.builtin.stat:
+    path: "{{ plausible_volume_geoip }}/GeoLite2-Country.mmdb"
+  register: plausible_geoip_stat
+
 - name: Set up directories
   ansible.builtin.file:
     state: directory
     path: "{{ item }}"
     mode: 0755
   with_items:
-    - "{{ plausible_volume_media }}"
-    - "{{ plausible_volume_certs }}"
-    - "{{ plausible_volume_geoip }}"
-    - "{{ plausible_volume_templates }}"
     - "{{ plausible_volume_config }}"
-    - "{{ plausible_volume_redis }}"
+    - "{{ plausible_volume_events }}"
     - "~/plausible"
   tags:
     - configuration
@@ -28,20 +30,34 @@
     - "{{ plausible_volume_db }}"
   tags:
     - configuration
-  become: false
+  become: true
+
+- name: Write plausible configuration (1)
+  ansible.builtin.template:
+    src: "{{ item }}.j2"
+    dest: "{{ plausible_volume_config }}/{{ item }}"
+    mode: '0640'
+  loop:
+    - "env.plausible.conf"
+    - "env.mail.conf"
+  tags:
+    - configuration
+
+- name: Write plausible configuration (2)
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "{{ plausible_volume_config }}/{{ item }}"
+    mode: '0640'
+  loop:
+    - "clickhouse-config.xml"
+    - "clickhouse-user-config.xml"
+  tags:
+    - configuration
 
 - name: Copy plausible docker-compose template.
   ansible.builtin.template:
     src: templates/docker-compose.yml.j2
     dest: ~/plausible/docker-compose.yml
-    mode: '0640'
-  become: false
-  notify: Restart plausible
-
-- name: Copy plausible configuration.
-  ansible.builtin.template:
-    src: templates/env.plausible.conf.j2
-    dest: "{{ plausible_volume_config }}/env.plausible.conf"
     mode: '0640'
   become: false
   notify: Restart plausible
