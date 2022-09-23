@@ -1,6 +1,9 @@
 ---
 # defaults file for plausible
 
+# Plausible
+plausible_version: "latest"
+
 # Email
 plausible_smtp_host:
 plausible_smtp_port: 587
@@ -19,9 +22,13 @@ plausible_secret_key_base: change-me
 plausible_smtp_email: "changeme@example.com"
 
 # Database
+plausible_db_port:
+plausible_db_host: "plausible_db"
+plausible_db: "plausible_db"
+plausible_db_password: "change_me"
 plausible_clickhouse_version: "21.3.2.5"
-plausible_version: "latest"
-plausible_pg_password: "change_me"
+
+
 
 # Volumes
 plausible_volume_base: "/mnt/plausible"

@@ -42,6 +42,7 @@
   loop:
     - "env.plausible.conf"
     - "env.mail.conf"
+    - "env.db.conf"
   tags:
     - configuration
 

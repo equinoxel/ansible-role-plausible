@@ -13,8 +13,12 @@ services:
     restart: always
     volumes:
       - {{ plausible_volume_db }}:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_PASSWORD={{ plausible_pg_password }}
+{% if plausible_db_port %}
+    ports:
+      - {{ plausible_db_port }}:5432
+{% endif %}
+    env_file:
+      - {{ plausible_volume_config }}/env.db.conf
     networks:
       - plausible
 
@@ -44,7 +48,7 @@ services:
       - {{ plausible_port }}:8000
     env_file:
       - {{ plausible_volume_config }}/env.plausible.conf
-{% if plausible_geoip_stat.stat.exists %}
+{% if plausible_volume_geoip and plausible_geoip_db and plausible_geoip_stat.stat.exists %}
     volumes:
       - {{ plausible_volume_geoip }}/{{ plausible_geoip_db }}:/geoip:ro
 {% else %}
