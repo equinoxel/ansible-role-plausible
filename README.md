@@ -106,7 +106,7 @@ None
 
 ```yaml
 ---
-- name: Create unifi volume
+- name: Example playbook
   hosts: services
   vars:
     plausible_port: "8100"
