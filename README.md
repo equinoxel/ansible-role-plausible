@@ -1,6 +1,6 @@
 # laurivan.plausible
 
-THis is a role to install [Plausible](https://plausible.io/) via Docker.
+This is a role to install [Plausible](https://plausible.io/) via Docker.
 
 ## Requirements
 
