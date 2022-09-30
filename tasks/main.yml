@@ -1,5 +1,4 @@
 ---
-# tasks file for plausible
 
 # Check if geoip volume exists
 - name: Check if geoip volume exists
@@ -70,4 +69,3 @@
     project_src: ~/plausible/
     build: false
   become: false
-
