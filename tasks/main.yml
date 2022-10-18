@@ -59,13 +59,13 @@
 - name: Copy plausible docker-compose template.
   ansible.builtin.template:
     src: templates/docker-compose.yml.j2
-    dest: ~/plausible/docker-compose.yml
+    dest: "{{ plausible_volume_base }}/docker-compose.yml"
     mode: '0640'
   become: false
   notify: Restart plausible
 
 - name: Ensure plausible is running.
   community.docker.docker_compose:
-    project_src: ~/plausible/
+    project_src: "{{ plausible_volume_base }}"
     build: false
   become: false
